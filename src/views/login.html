@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Blood Management System - Login</title>
+    <link rel="stylesheet" href="../css/login.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</head>
+<body>
+    <div class="login-card">
+        <h2>Blood Bank</h2>
+        <div class="input-group">
+            <label><h4>Username</h4></label>
+            <input type="text" id="username" placeholder="Enter your ID" autofocus>
+        </div>
+        <!--<div class="input-group">
+            <label><h4>password</h4></label>
+            <input type="password" id="password" placeholder="••••••••">
+        </div> -->
+         
+        <div class="input-group" style="position: relative; width: 100%;">
+        <label><h4>password</h4></label>
+        <input type="password" id="password" placeholder="Password" required style="width: 100%; padding-right: 40px;">
+        <i class='bx bx-hide' id="togglePassword" style="position: absolute; right: 10px; top: 70%; transform: translateY(-50%); cursor: pointer; color: #666666; font-size: 20px;"></i>
+        </div>
+ <div class="remember-me-container" style="margin-top: 5px; display: flex; align-items: center; gap: 8px;">
+    <input type="checkbox" id="rememberMe" style="cursor: pointer; width: 20px; ">
+    <label for="rememberMe" style="cursor: pointer; font-size: 14px; color: #000000;">Remember Me</label>
+</div>
+
+
+        <button id="loginBtn" class="login-btn">Login</button>
+    </div>
+    <script src="../renderers/renderers-login.js"></script>
+</body>
+</html>

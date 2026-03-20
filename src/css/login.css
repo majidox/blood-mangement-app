@@ -1,0 +1,99 @@
+/* style.css */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(-40deg, #d32f2f, #42abf1, #c2185b, #123091);
+    background-size: 400% 400%;
+    animation: gradientMove 15s ease infinite;
+}
+
+@keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+.logien-card {
+    background: rgba(255, 255, 255, 0.8); /* Semi-transparent */
+    backdrop-filter: blur(15px);          /* Glass effect */
+    border-radius: 24px;                  /* Softer corners */
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1); /* Softer shadow */
+    padding: 50px;
+    transition: transform 0.3s ease;
+}
+.login-card {
+    background: rgba(255, 255, 255, 0.85); /* Slightly transparent */
+    backdrop-filter: blur(10px); /* Blurs the background animation behind the card */
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+    width: 350px;
+    text-align: center;
+    border: 5px solid rgba(14, 3, 3, 0.3);
+}
+
+.login-card h2 {
+    color: #d32f2f;
+    margin-bottom: 10px;
+}
+
+.input-group {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #eee;
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+
+.login-btn {
+    width: 100%;
+    padding: 12px;
+    background: #d32f2f;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+:root {
+    --primary-bg: #f0f2f5;
+    --sidebar-bg: rgba(26, 32, 44, 0.9);
+    --accent: #00bcd4;
+    --white: #ffffff;
+    --text-main: #344767;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Roboto, sans-serif;
+}
+
+body {
+    background-color: var(--primary-bg);
+    overflow: hidden;
+}
+
+.dashboard-container {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+}

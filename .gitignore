@@ -1,0 +1,13 @@
+# Dependencies
+node_modules/
+
+# Database (Keep your donor data private)
+db.json
+
+# Build files
+dist/
+out/
+
+# System files
+.DS_Store
+*.log

@@ -1,0 +1,14 @@
+{
+  "name": "blood-mangement-app",
+  "version": "1.0.0",
+  "description": "Blood Bank Management System",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^latest"
+  }
+}
