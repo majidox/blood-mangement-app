@@ -2,6 +2,7 @@ window.addEventListener('DOMContentLoaded', () => {
     const loginBtn = document.getElementById('loginBtn');
     const usernameInput = document.getElementById('username');
     const passwordInput = document.getElementById('password');
+    require('electron').webFrame.setZoomLevel(0);
 
     const handleLogin = () => {
         const user = usernameInput.value;

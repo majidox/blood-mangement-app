@@ -1,83 +1,96 @@
-window.addEventListener('DOMContentLoaded', () => {
-    const loginBtn = document.getElementById('loginBtn');
-    const usernameInput = document.getElementById('username');
-    const passwordInput = document.getElementById('password');
-    const rememberCheckbox = document.getElementById('rememberMe');
+const { ipcRenderer } = require('electron');
 
-    // --- 1. AUTO-FILL LOGIC ---
-    // Check if we have a saved username when the page loads
-    const savedUser = localStorage.getItem('rememberedUser');
-    if (savedUser) {
-        usernameInput.value = savedUser;
-        rememberCheckbox.checked = true;
-        passwordInput.focus(); // Focus password since username is done
-    } else {
-        usernameInput.focus(); // Standard focus
+const loginForm = document.getElementById('loginForm');
+const usernameInput = document.getElementById('username');
+const passwordInput = document.getElementById('password');
+const togglePasswordBtn = document.getElementById('togglePassword');
+const cardAlert = document.getElementById('cardAlert');
+const alertMessage = document.getElementById('alertMessage');
+const rememberMeCheckbox = document.getElementById('rememberMe');
+const submitBtn = document.getElementById('submitBtn');
+
+// --- 1. REMEMBER CREDENTIALS LOGIC ---
+document.addEventListener('DOMContentLoaded', () => {
+    const savedUsername = localStorage.getItem('remembered_username');
+    if (savedUsername) {
+        usernameInput.value = savedUsername;
+        rememberMeCheckbox.checked = true;
+        if (passwordInput) passwordInput.focus();
     }
-
-    // --- 2. THE LOGIN HANDLER ---
-    const handleLogin = () => {
-        const user = usernameInput.value;
-        const pass = passwordInput.value;
-
-        if (user === "admin" && pass === "12345") {
-            // SUCCESS
-            loginBtn.style.backgroundColor = "#2e7d32";
-            loginBtn.innerText = "Access Granted...";
-
-            // Handle "Remember Me" storage
-            if (rememberCheckbox.checked) {
-                localStorage.setItem('rememberedUser', user);
-            } else {
-                localStorage.removeItem('rememberedUser');
-            }
-
-            setTimeout(() => {
-                window.location.href = "../views/dashboard.html";
-            }, 500);
-
-        } else {
-            // FAILURE
-            usernameInput.value = "";
-            passwordInput.value = "";
-            loginBtn.innerText = "Access Refused";
-            loginBtn.style.backgroundColor = "#d32f2f"; // Changed to Red for error
-
-            setTimeout(() => {
-                loginBtn.innerText = "Login";
-                loginBtn.style.backgroundColor = "#2f89d3";
-                usernameInput.focus();
-            }, 1000);
-        }
-    };
-
-    // Attach the handler to the button
-    loginBtn.addEventListener('click', handleLogin);
-    
-    // Also allow "Enter" key to trigger login
-    passwordInput.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') handleLogin();
-    });
 });
 
-    /*function togle password */
+// --- 2. SHOW / HIDE PASSWORD TOGGLE ---
+togglePasswordBtn.addEventListener('click', () => {
+    if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        togglePasswordBtn.textContent = '🙈'; 
+    } else {
+        passwordInput.type = 'password';
+        togglePasswordBtn.textContent = '👁️'; 
+    }
+});
 
-const togglePassword = document.getElementById('togglePassword');
-const password = document.getElementById('password');
+// --- 3. FORM SUBMISSION & ACTIVE USER SESSION ENGINE ---
+if (loginForm) {
+    loginForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
 
-if (togglePassword && password) {
-    togglePassword.addEventListener('click', function () {
-        // 1. Toggle the type attribute
-        const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
-        password.setAttribute('type', type);
+        // Lock form immediately to stop click spamming
+        submitBtn.disabled = true;
+        cardAlert.classList.add('hidden'); 
 
-        // 2. Toggle the icon appearance
-        this.classList.toggle('bx-show');
-        this.classList.toggle('bx-hide');
-        
-        // 3. Keep focus on the input so the user can keep typing
-        password.focus();
+        const username = usernameInput.value.trim();
+        const password = passwordInput.value;
+
+        if (!username || !password) {
+            alertMessage.textContent = "Please fill in all fields.";
+            cardAlert.classList.remove('hidden');
+            submitBtn.disabled = false; 
+            return;
+        }
+
+        try {
+            const response = await ipcRenderer.invoke('auth:login', { username, password });
+
+            if (response.success) {
+                // --- FIXED & UPGRADED TO LOCALSTORAGE ---
+                localStorage.setItem('active_username', username);
+                localStorage.setItem('active_role', response.role);
+
+                // Remember username logic based on checkbox state
+                if (rememberMeCheckbox.checked) {
+                    localStorage.setItem('remembered_username', username);
+                } else {
+                    localStorage.removeItem('remembered_username');
+                }
+
+                console.log("Authenticated successfully. Redirecting...");
+// 1. Save the logged-in username and role to local memory
+    localStorage.setItem('active_username', username);
+    localStorage.setItem('active_role', response.role);
+
+    console.log("Session saved! Proceeding to dashboard...");
+    // Your main.js will now change windows to dashboard.html automatically
+
+
+                
+                // main.js handles transitioning to preload.html automatically!
+                
+            } else {
+                // Show integrated alert block inside the form layout
+                alertMessage.textContent = response.message;
+                cardAlert.classList.remove('hidden');
+                
+                // Anti-spam countdown cooldown
+                setTimeout(() => {
+                    submitBtn.disabled = false;
+                }, 1500);
+            }
+        } catch (error) {
+            console.error("IPC Error:", error);
+            alertMessage.textContent = "System Error: Server could not be reached.";
+            cardAlert.classList.remove('hidden');
+            submitBtn.disabled = false;
+        }
     });
 }
-
- 

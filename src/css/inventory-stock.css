@@ -1,0 +1,366 @@
+/* ==========================================================================
+   💎 PREMIUM LAB INVENTORY STYLING UTILITIES
+   ========================================================================== */
+
+/* Main Panel Layout Base Wrapper */
+.inventory-dashboard {
+    background: #0d1117 !important;
+    color: #c9d1d9 !important;
+    padding: 24px !important;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    border-radius: 12px;
+}
+
+/* Beautiful Rounded Workspace Containers */
+.bg-dark-card {
+    background: #161b22 !important;
+    border: 1px solid #30363d !important;
+    border-radius: 12px !important;
+    padding: 20px !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25) !important;
+    margin-bottom: 20px !important;
+}
+
+/* 🗂️ CLEAN TAB NAVIGATION */
+#inventoryMasterTabs {
+    display: flex !important;
+    flex-direction: row !important;
+    list-style: none !important;
+    padding-left: 0 !important;
+    margin-bottom: 24px !important;
+    border-bottom: 1px solid #30363d !important;
+}
+
+#inventoryMasterTabs .nav-link {
+    color: #8b949e !important;
+    background: transparent !important;
+    border: none !important;
+    border-bottom: 2px solid transparent !important;
+    padding: 12px 24px !important;
+    font-size: 0.95rem !important;
+    font-weight: 600 !important;
+    cursor: pointer !important;
+    transition: all 0.2s ease;
+}
+
+#inventoryMasterTabs .nav-link:hover {
+    color: #ffffff !important;
+}
+
+#inventoryMasterTabs .nav-link.active {
+    color: #58a6ff !important;
+    border-bottom: 2px solid #58a6ff !important;
+}
+
+/* 🔍 MODERN DROPDOWNS AND SEARCH FIELDS */
+.form-select, #inventorySearchField {
+    background-color: #0d1117 !important;
+    color: #ffffff !important;
+    border: 1px solid #30363d !important;
+    border-radius: 8px !important;
+    padding: 10px 16px !important;
+    font-size: 0.9rem !important;
+    min-width: 180px;
+    outline: none !important;
+    transition: all 0.2s ease;
+}
+
+#inventorySearchField {
+    min-width: 280px !important;
+}
+
+.form-select:focus, #inventorySearchField:focus {
+    border-color: #58a6ff !important;
+    box-shadow: 0 0 0 3px rgba(88, 166, 255, 0.15) !important;
+}
+
+/* 📊 CRISP ASSET LEDGER TABLE GRID */
+#mainInventoryGrid {
+    width: 100% !important;
+    border-collapse: separate !important;
+    border-spacing: 0 !important;
+    margin-top: 10px !important;
+}
+
+#mainInventoryGrid th {
+    font-weight: 600 !important;
+    font-size: 0.82rem !important;
+    color: #8b949e !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+    padding: 16px 12px !important;
+    border-bottom: 2px solid #30363d !important;
+    background-color: #161b22 !important;
+}
+
+#mainInventoryGrid td {
+    padding: 16px 12px !important;
+    font-size: 0.9rem !important;
+    color: #e6edf3 !important;
+    border-bottom: 1px solid #21262d !important;
+}
+
+#mainInventoryGrid tbody tr:hover {
+    background-color: rgba(255, 255, 255, 0.02) !important;
+    cursor: pointer;
+}
+
+/* ⏱️ LIVE MOVEMENT STREAM SIDEBAR */
+#sidebarMovementsAnchor .bg-dark-card {
+    min-height: 450px !important;
+}
+
+.movement-item-log {
+    padding: 14px 12px !important;
+    background: #0d1117 !important;
+    border: 1px solid #21262d !important;
+    border-radius: 8px !important;
+    margin-top: 12px !important;
+}
+
+.item-timestamp {
+    color: #8b949e !important;
+}
+.inventory-dashboard .row {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    gap: 20px !important;
+    align-items: flex-start !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* Force the Left Workspace Table to take up 75% of the line width */
+.inventory-dashboard .col-lg-9 {
+    flex: 0 0 75% !important;
+    max-width: 75% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+/* Force the Right Sidebar to take up 25% of the line width and stay on the right */
+.inventory-dashboard .col-lg-3, #sidebarMovementsAnchor {
+    flex: 0 0 25% !important;
+    max-width: 25% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+/* Double-check that hidden headers vanish completely */
+.d-none, #headersSerologyStock.d-none, #headersBloodStock.d-none {
+    display: none !important;
+}
+/* Force the outer filter wrapper container to behave as a single inline row */
+.bg-dark-card.d-flex.flex-wrap {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important; /* Prevents dropping to the next line */
+    align-items: center !important;
+    justify-content: flex-start !important;
+    gap: 12px !important; /* Clean horizontal spacing between elements */
+    width: 100% !important;
+}
+
+/* Force the dropdown wrapper block onto the same line */
+.bg-dark-card .d-flex.gap-2 {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    gap: 12px !important;
+}
+
+/* Push the search input box wrapper out onto the far right side of the same line */
+.search-box-wrapper {
+    margin-left: auto !important; /* Pushes search bar cleanly to the right */
+    display: block !important;
+}
+.entry-form-container {
+    border-radius: 12px !important;
+}
+
+/* Match your exact input border-radius, background, and padding rules */
+.form-entry-input {
+    background-color: #0d1117 !important;
+    color: #ffffff !important;
+    border: 1px solid #30363d !important;
+    border-radius: 8px !important;
+    padding: 8px 8px !important;
+    font-size: 0.9rem !important;
+    height: 44px !important;
+}
+
+/* Fix the button radius, matching height, and text centering */
+.btn-primary-custom {
+    background-color: #238636 !important; 
+    color: #ffffff !important;
+    border: 1px solid #2ea44f !important;
+    border-radius: 8px !important;
+    height: 44px !important;
+    font-size: 0.9rem !important;
+    padding: 0 16px !important;
+    transition: all 0.2s ease !important;
+}
+
+.btn-primary-custom:hover {
+    background-color: #2ea44f !important;
+}
+input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(1) brightness(0.8) !important;
+    cursor: pointer;
+}
+
+
+@keyframes pulse-danger-glow {
+    0% { opacity: 0.8; }
+    50% { opacity: 1; box-shadow: 0 0 12px rgba(255, 110, 110, 0.2); }
+    100% { opacity: 0.8; }
+}
+
+/* 🔄 INTERACTIVE REFRESH LOADING BAR EFFECT */
+.table-loading-bar-wrapper {
+    position: relative;
+    width: 100%;
+    height: 3px;
+    background: transparent;
+    overflow: hidden;
+    margin-bottom: -3px; /* Prevents layout shifting */
+    z-index: 10;
+}
+
+.table-loading-bar {
+    width: 30%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, #58a6ff, transparent);
+    position: absolute;
+    left: -30%;
+    animation: dynamic-loading-slide 1.5s infinite linear;
+    display: none; /* Controlled by JS during fetch transitions */
+}
+
+@keyframes dynamic-loading-slide {
+    0% { left: -30%; }
+    100% { left: 100%; }
+}
+.expiry-normal, .expiry-warning, .expiry-danger {
+    display: inline-block !important;
+    white-space: nowrap !important;        /* Forces the date text to stay strictly on one line */
+    padding: 4px 10px !important;         /* Comfortable breathing room inside the pill */
+    border-radius: 6px !important;         /* Matches your design system layout curves */
+    font-size: 0.82rem !important;         /* Uniform text alignment size */
+    font-weight: bold !important;
+    text-align: center !important;
+}
+
+/* Normal State (Safe Shelf Life) */
+.expiry-normal {
+    color: #58a6ff !important;
+    background: rgba(56, 139, 253, 0.1) !important;
+    border: 1px solid rgba(56, 139, 253, 0.2) !important;
+}
+
+/* Warning State (Near Expiration) */
+.expiry-warning {
+    color: #ffa245 !important;
+    background: rgba(255, 162, 69, 0.1) !important;
+    border: 1px solid rgba(255, 162, 69, 0.25) !important;
+    box-shadow: 0 0 8px rgba(255, 162, 69, 0.05);
+}
+
+/* Danger State (Expired) - Beautiful Clean Single Line */
+.expiry-danger {
+    color: #ff7b72 !important;
+    background: rgba(248, 81, 73, 0.1) !important;
+    border: 1px solid rgba(248, 81, 73, 0.2) !important;
+    box-shadow: 0 0 8px rgba(248, 81, 73, 0.05);
+    animation: pulse-danger-glow 2s infinite ease-in-out;
+}
+
+/* ==========================================================================
+   🗂️ SEROLOGY SUB-TABS NAVIGATION PRESETS (FIXED HORIZONTAL ROW)
+   ========================================================================== */
+
+/* Force the sub-tabs container to strip bullets and align horizontally */
+#serologySubTabs {
+    display: flex !important;
+    flex-direction: row !important;
+    list-style: none !important;
+    padding-left: 0 !important;
+    margin: 0 0 16px 0 !important;
+    gap: 10px !important;
+}
+
+/* Ensure the list elements do not introduce bullet items or unexpected spacing */
+#serologySubTabs li {
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+/* Premium dark mode sub-pill design matches your master design layout */
+#serologySubTabs .nav-link {
+    color: #8b949e !important;
+    background: #161b22 !important;
+    border: 1px solid #30363d !important;
+    padding: 6px 16px !important;
+    font-size: 0.85rem !important;
+    border-radius: 6px !important;
+    transition: all 0.2s ease-in-out !important;
+    cursor: pointer !important;
+}
+
+#serologySubTabs .nav-link:hover {
+    color: #ffffff !important;
+    border-color: #8b949e !important;
+    background: #21262d !important;
+}
+
+#serologySubTabs .nav-link.active {
+    color: #58a6ff !important;
+    background: rgba(56, 139, 253, 0.1) !important;
+    border: 1px solid rgba(56, 139, 253, 0.4) !important;
+    box-shadow: 0 0 10px rgba(56, 139, 253, 0.1) !important;
+}
+
+#bloodSubTabs {
+    display: flex !important;
+    flex-direction: row !important;
+    list-style: none !important;
+    padding-left: 0 !important;
+    margin: 0 0 16px 0 !important;
+    gap: 10px !important;
+}
+
+/* Ensure the list elements do not introduce bullet items or unexpected spacing */
+#bloodSubTabs li {
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+
+
+#bloodSubTabs .nav-link {
+    color: #8b949e !important;
+    background: #161b22 !important;
+    border: 1px solid #30363d !important;
+    padding: 6px 16px !important;
+    font-size: 0.85rem !important;
+    border-radius: 6px !important;
+    transition: all 0.2s ease-in-out !important;
+    cursor: pointer !important;
+}
+
+#bloodSubTabs .nav-link:hover {
+    color: #ffffff !important;
+    border-color: #8b949e !important;
+    background: #21262d !important;
+}
+
+#bloodSubTabs .nav-link.active {
+    color: #58a6ff !important;
+    background: rgba(56, 139, 253, 0.1) !important;
+    border: 1px solid rgba(56, 139, 253, 0.4) !important;
+    box-shadow: 0 0 10px rgba(56, 139, 253, 0.1) !important;
+}

@@ -7,6 +7,7 @@ const tableBody = document.getElementById('donor-list-body');
 let editMode = false;
 let currentEditId = null;
 const submitBtn = donorForm.querySelector('button[type="submit"]');
+require('electron').webFrame.setZoomLevel(0);
 
 
 // 1. INITIALIZE PAGE

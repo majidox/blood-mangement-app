@@ -1,37 +1,66 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blood Management System - Login</title>
     <link rel="stylesheet" href="../css/login.css">
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 </head>
 <body>
-    <div class="login-card">
-        <h2>Blood Bank</h2>
-        <div class="input-group">
-            <label><h4>Username</h4></label>
-            <input type="text" id="username" placeholder="Enter your ID" autofocus>
+    
+    <div class="login-wrapper">
+        <div class="login-card">
+            <div class="login-header">
+                <div class="brand-logo">🩸</div>
+                <h2>Hôpital Mixte Djelfa</h2>
+                <p>Blood Management System</p>
+            </div>
+            
+            <form id="loginForm" class="login-form">
+                <div class="input-group">
+                    <input type="text" id="username" required placeholder=" " autofocus>
+                    <label for="username">Username</label>
+                    <div class="input-bar"></div>
+                </div>
+                
+                <div class="input-group password-group">
+                    <input type="password" id="password" required placeholder=" ">
+                    <label for="password">Password</label>
+                    <button type="button" id="togglePassword" class="toggle-password-btn" title="Show/Hide Password">👁️</button>
+                    <div class="input-bar"></div>
+                </div>
+                
+                <div id="cardAlert" class="card-alert hidden">
+                    <span class="alert-icon">⚠️</span>
+                    <span id="alertMessage" class="alert-text">Invalid username or password.</span>
+                </div>
+                
+                <div class="form-options">
+                    <label class="remember-me">
+                        <input type="checkbox" id="rememberMe">
+                        <span class="custom-checkbox"></span>
+                        Remember my credentials
+                    </label>
+                </div>
+                
+                <button type="submit" id="submitBtn" class="btn-submit">
+                    <span>Sign In</span>
+                    <svg class="icon-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </button>
+            </form>
         </div>
-        <!--<div class="input-group">
-            <label><h4>password</h4></label>
-            <input type="password" id="password" placeholder="••••••••">
-        </div> -->
-         
-        <div class="input-group" style="position: relative; width: 100%;">
-        <label><h4>password</h4></label>
-        <input type="password" id="password" placeholder="Password" required style="width: 100%; padding-right: 40px;">
-        <i class='bx bx-hide' id="togglePassword" style="position: absolute; right: 10px; top: 70%; transform: translateY(-50%); cursor: pointer; color: #666666; font-size: 20px;"></i>
-        </div>
- <div class="remember-me-container" style="margin-top: 5px; display: flex; align-items: center; gap: 8px;">
-    <input type="checkbox" id="rememberMe" style="cursor: pointer; width: 20px; ">
-    <label for="rememberMe" style="cursor: pointer; font-size: 14px; color: #000000;">Remember Me</label>
-</div>
-
-
-        <button id="loginBtn" class="login-btn">Login</button>
     </div>
+
+    <footer class="login-footer">
+        <p>&copy; 2026 Hôpital Mixte Djelfa. All rights reserved.</p>
+        <div class="footer-links">
+            <span class="developer-tag">Developed by <strong>Bouzouada Nail (Xork)</strong></span>
+            <span class="separator">•</span>
+            <a href="#">System Support</a>
+        </div>
+    </footer>
+
     <script src="../renderers/renderers-login.js"></script>
 </body>
 </html>

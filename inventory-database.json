@@ -1,0 +1,258 @@
+{
+  "bloodBags": [
+    {
+      "bagId": "BAG-2026-X81",
+      "verifiedBloodType": "O-",
+      "phenotypeProfile": "ccdee, K-",
+      "volume": 450,
+      "storageLocation": "Fridge A-1 (Main Stock)",
+      "stockStatus": "Optimal",
+      "approvalTimestamp": "2026-07-01T12:00:00.000Z",
+      "expirationTimestamp": "2026-08-05T12:00:00.000Z"
+    },
+    {
+      "bagId": "BAG-2026-A12",
+      "verifiedBloodType": "A+",
+      "phenotypeProfile": "CcDEe, K+",
+      "volume": 500,
+      "storageLocation": "Fridge A-1 (Main Stock)",
+      "stockStatus": "Low Stock",
+      "approvalTimestamp": "2026-07-01T14:30:00.000Z",
+      "expirationTimestamp": "2026-08-01T14:30:00.000Z"
+    },
+    {
+      "bagId": "BAG-2026-2765",
+      "runtimeState": "distributed",
+      "storageLocation": "Fridge A-1",
+      "stockStatus": "Available"
+    },
+    {
+      "bagId": "BAG-2026-8486",
+      "runtimeState": "active",
+      "storageLocation": "Fridge A-1",
+      "stockStatus": "Available"
+    },
+    {
+      "bagId": "BAG-2026-4543",
+      "runtimeState": "active",
+      "storageLocation": "Fridge A-1",
+      "stockStatus": "Available"
+    },
+    {
+      "bagId": "BAG-2026-5926",
+      "runtimeState": "active",
+      "storageLocation": "Fridge A-1",
+      "stockStatus": "Available"
+    },
+    {
+      "bagId": "QUARANTINE-DON-2026-1021",
+      "runtimeState": "quarantine",
+      "storageLocation": "Deep Cold C-2 (Plasma)",
+      "stockStatus": "Quarantined"
+    }
+  ],
+  "serologyReagents": [
+    {
+      "reagentId": "REA-2026-8893",
+      "kitName": "serologie",
+      "batchLotNo": "1200",
+      "availableQty": 4,
+      "unitType": "Vials",
+      "storageLocation": "Reagent Cabinet Shelf-3",
+      "stockStatus": "Optimal",
+      "receivedTimestamp": "2026-07-05T12:32:43.733Z",
+      "expiryDate": "2027-12-03",
+      "currentAppCount": 46
+    },
+    {
+      "reagentId": "REA-2026-5056",
+      "kitName": "majdi",
+      "batchLotNo": "15516",
+      "availableQty": 120,
+      "testsPerUnit": 50,
+      "deductionPerBag": 2,
+      "currentAppCount": 50,
+      "unitType": "Vials",
+      "storageLocation": "Reagent Cabinet Shelf-3",
+      "stockStatus": "Optimal",
+      "receivedTimestamp": "2026-07-05T12:40:17.965Z",
+      "expiryDate": "2029-12-20"
+    },
+    {
+      "reagentId": "REA-2026-4345",
+      "kitName": "dsf",
+      "batchLotNo": "dsfdsf",
+      "availableQty": 12,
+      "testsPerUnit": 20,
+      "deductionPerBag": 12,
+      "currentAppCount": 20,
+      "unitType": "Vials",
+      "storageLocation": "Reagent Cabinet Shelf-3",
+      "stockStatus": "Optimal",
+      "receivedTimestamp": "2026-07-06T19:21:02.179Z",
+      "expiryDate": "202020-12-20"
+    }
+  ],
+  "recentMovements": [
+    {
+      "movementId": "MOV-1783373228883",
+      "timestamp": "2026-07-06T21:27:08.883Z",
+      "type": "quarantine",
+      "assetId": "QUARANTINE-DON-2026-1021",
+      "description": "⚠️ Security Alert: Unit [QUARANTINE-DON-2026-1021] failed laboratory assay checks and was routed to Quarantine inventory.",
+      "performedBy": "Lab System Validation"
+    },
+    {
+      "movementId": "MOV-1783373176793",
+      "timestamp": "2026-07-06T21:26:16.793Z",
+      "type": "deduction",
+      "assetId": "BAG-2026-5926",
+      "description": "🤖 Auto-Ingest: Bag [BAG-2026-5926] verified. Consumed 1 drops from Reagent Batch [1200].",
+      "performedBy": "Lab Auto-Deduction System"
+    },
+    {
+      "movementId": "MOV-1783371468120",
+      "timestamp": "2026-07-06T20:57:48.120Z",
+      "type": "deduction",
+      "assetId": "BAG-2026-4543",
+      "description": "🤖 Auto-Ingest: Bag [BAG-2026-4543] verified. Consumed 1 drops from Reagent Batch [1200].",
+      "performedBy": "Lab Auto-Deduction System"
+    },
+    {
+      "movementId": "MOV-1783371379549",
+      "timestamp": "2026-07-06T20:56:19.549Z",
+      "type": "deduction",
+      "assetId": "BAG-2026-8486",
+      "description": "🤖 Auto-Ingest: Bag [BAG-2026-8486] verified. Consumed 1 drops from Reagent Batch [1200].",
+      "performedBy": "Lab Auto-Deduction System"
+    },
+    {
+      "movementId": "MOV-1783370990044",
+      "timestamp": "2026-07-06T20:49:50.044Z",
+      "type": "distribution",
+      "assetId": "BAG-2026-2765",
+      "description": "Blood Unit asset [BAG-2026-2765] updated state status descriptor directly to Distributed Archive.",
+      "performedBy": "Inventory Router"
+    },
+    {
+      "movementId": "MOV-1783370915607",
+      "timestamp": "2026-07-06T20:48:35.607Z",
+      "type": "deduction",
+      "assetId": "BAG-2026-2765",
+      "description": "🤖 Auto-Ingest: Bag [BAG-2026-2765] verified. Consumed 1 drops from Reagent Batch [1200].",
+      "performedBy": "Lab Auto-Deduction System"
+    },
+    {
+      "movementId": "MOV-1719864000000",
+      "timestamp": "2026-07-01T20:00:00.000Z",
+      "type": "addition",
+      "assetId": "BAG-2026-X81",
+      "description": "Checked in 2 units of O- blood bags into Main Stock.",
+      "performedBy": "Lab System Admin"
+    },
+    {
+      "movementId": "MOV-1782943073825",
+      "timestamp": "2026-07-01T21:57:53.825Z",
+      "type": "addition",
+      "assetId": "REA-2026-6465",
+      "description": "Added 12 Boxes of \"azdeazd\" (Lot: azdazd) to Reagent Cabinet Shelf-3.",
+      "performedBy": "Lab System Admin"
+    },
+    {
+      "movementId": "MOV-1782943100979",
+      "timestamp": "2026-07-01T21:58:20.979Z",
+      "type": "addition",
+      "assetId": "REA-2026-6564",
+      "description": "Added 2 Vials of \"salim\" (Lot: amrounia) to Reagent Cabinet Shelf-3.",
+      "performedBy": "Lab System Admin"
+    },
+    {
+      "movementId": "MOV-1782943107326",
+      "timestamp": "2026-07-01T21:58:27.326Z",
+      "type": "addition",
+      "assetId": "REA-2026-2168",
+      "description": "Added 3 Boxes of \"dss\" (Lot: dsdsd5456) to Reagent Cabinet Shelf-3.",
+      "performedBy": "Lab System Admin"
+    },
+    {
+      "movementId": "MOV-1783009258807",
+      "timestamp": "2026-07-02T16:20:58.807Z",
+      "type": "addition",
+      "assetId": "REA-2026-1799",
+      "description": "Added 120 Boxes of \"mohamed\" (Lot: 4665) to Reagent Cabinet Shelf-3.",
+      "performedBy": "Lab System Admin"
+    },
+    {
+      "movementId": "MOV-1783009380873",
+      "timestamp": "2026-07-02T16:23:00.873Z",
+      "type": "addition",
+      "assetId": "REA-2026-8586",
+      "description": "Added 12010 Boxes of \"salmi\" (Lot: asas) to Reagent Cabinet Shelf-3.",
+      "performedBy": "Lab System Admin"
+    },
+    {
+      "movementId": "MOV-1783009833971",
+      "timestamp": "2026-07-02T16:30:33.971Z",
+      "type": "addition",
+      "assetId": "REA-2026-8107",
+      "description": "Added 120 Boxes of \"fawzi\" (Lot: hamid) to Reagent Cabinet Shelf-3.",
+      "performedBy": "Lab System Admin"
+    },
+    {
+      "movementId": "MOV-1783023963690",
+      "timestamp": "2026-07-02T20:26:03.690Z",
+      "type": "addition",
+      "assetId": "REA-2026-7828",
+      "description": "Added 1128 Vials of \"efzze\" (Lot: fezfez) to Reagent Cabinet Shelf-3.",
+      "performedBy": "Lab System Admin"
+    },
+    {
+      "movementId": "MOV-1783024009066",
+      "timestamp": "2026-07-02T20:26:49.066Z",
+      "type": "addition",
+      "assetId": "REA-2026-3274",
+      "description": "Added 122 Boxes of \"dfsf\" (Lot: sdfdsf) to Reagent Cabinet Shelf-3.",
+      "performedBy": "Lab System Admin"
+    },
+    {
+      "movementId": "MOV-1783201287114",
+      "timestamp": "2026-07-04T21:41:27.114Z",
+      "type": "addition",
+      "assetId": "REA-2026-6237",
+      "description": "Added 11 Boxes of \"scdfsc\" (Lot: qsdcqdsc) to Reagent Cabinet Shelf-3.",
+      "performedBy": "Lab System Admin"
+    },
+    {
+      "movementId": "MOV-1783202005004",
+      "timestamp": "2026-07-04T21:53:25.004Z",
+      "type": "addition",
+      "assetId": "REA-2026-6863",
+      "description": "Added 12 Kits of \"fsdfsdf\" (Lot: fdsfds) to Reagent Cabinet Shelf-3.",
+      "performedBy": "Lab System Admin"
+    },
+    {
+      "movementId": "MOV-1783254763733",
+      "timestamp": "2026-07-05T12:32:43.733Z",
+      "type": "addition",
+      "assetId": "REA-2026-8893",
+      "description": "Added 5 Vials of \"serologie\" (Lot: 1200) to Reagent Cabinet Shelf-3.",
+      "performedBy": "Lab System Admin"
+    },
+    {
+      "movementId": "MOV-1783255217965",
+      "timestamp": "2026-07-05T12:40:17.965Z",
+      "type": "addition",
+      "assetId": "REA-2026-5056",
+      "description": "Added 120 Vials of \"majdi\" (Lot: 15516) to Reagent Cabinet Shelf-3.",
+      "performedBy": "Lab System Admin"
+    },
+    {
+      "movementId": "MOV-1783365662179",
+      "timestamp": "2026-07-06T19:21:02.179Z",
+      "type": "addition",
+      "assetId": "REA-2026-4345",
+      "description": "Added 12 Vials of \"dsf\" (Lot: dsfdsf) to Reagent Cabinet Shelf-3.",
+      "performedBy": "Lab System Admin"
+    }
+  ]
+}

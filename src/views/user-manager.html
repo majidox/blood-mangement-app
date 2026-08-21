@@ -1,0 +1,153 @@
+<div class="um-module-container animate-fade-in">
+    
+    <!-- TOAST NOTIFICATION BENCH -->
+    <div id="umToastContainer" class="um-toast-container"></div>
+
+    <!-- HEADER WORKSPACE LAYER -->
+    <div class="um-view-header">
+        <div class="um-title-area">
+            <h1>Gestion des Utilisateurs</h1>
+            <p>Manage hospital staff access, roles, and permissions within the CTS ecosystem.</p>
+        </div>
+        <button id="toggleFormBtn" class="um-btn-primary">
+            <span class="btn-pulse-icon"></span> 👤 Add New User
+        </button>
+    </div>
+
+    <!-- METRICS KANBAN LAYER -->
+    <div class="um-metrics-row">
+        <div class="um-metric-card staff-card">
+            <span class="um-card-label">TOTAL STAFF</span>
+            <div class="um-card-value-group">
+                <span class="um-card-main-val" id="totalStaffCount">124</span>
+                <span class="um-card-badge-trend">+3 this week</span>
+            </div>
+        </div>
+        <div class="um-metric-card admin-card">
+            <span class="um-card-label">ADMIN ROLES</span>
+            <div class="um-card-value-group">
+                <span class="um-card-main-val" id="totalAdminCount">06</span>
+                <span class="um-card-badge-status">Security audited</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- SMART TRANSITION PANEL CONTAINER -->
+    <div class="um-workspace-wrapper">
+        
+        <!-- VIEW A: INTERACTIVE DATABASE TABLE VIEW -->
+        <div id="umTableView" class="um-panel-view">
+            <div class="um-filter-bar">
+                <div class="um-search-box">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" id="umSearchInput" placeholder="Search by name, grade, or unique ID...">
+                </div>
+                <div class="um-filter-actions">
+                    <select id="umRoleFilter">
+                        <option value="all">Any Role</option>
+                        <option value="admin">Admin</option>
+                        <option value="staff">Staff</option>
+                        <option value="biologist">Biologist</option>
+                        <option value="doctor">Doctor</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="um-table-card">
+                <table class="um-data-grid">
+                    <thead>
+                        <tr>
+                            <th>User</th>
+                            <th>Unique ID</th>
+                            <th>Grade / Role</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="umTableBody">
+                        <!-- Dynamic content rows injected by engine -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- VIEW B: SUBMISSION FORM INPUT GRID -->
+        <div id="umFormView" class="um-panel-view um-element-hidden">
+            <div class="um-form-layout-card">
+                <div class="form-header-block">
+                    <h2>Initialize Credentials & Access Permissions</h2>
+                    <p>Setup system profiles for clinical personnel. All administrative actions are logged for compliance.</p>
+                </div>
+
+                <form id="hospitalUserForm" novalidate>
+                    <input type="hidden" id="formActionState" value="create">
+                    <input type="hidden" id="editingUserRowIndex">
+
+                    <div class="um-form-grid">
+                        <div class="um-input-group">
+                            <label>First Name</label>
+                            <input type="text" id="uFirstName" placeholder="e.g. Julian" required>
+                        </div>
+                        <div class="um-input-group">
+                            <label>Last Name</label>
+                            <input type="text" id="uLastName" placeholder="e.g. Vance" required>
+                        </div>
+                        <div class="um-input-group">
+                            <label>Username (Unique System ID)</label>
+                            <input type="text" id="uUsername" placeholder="e.g. j.vance" required>
+                        </div>
+                        <div class="um-input-group">
+                            <label>Grade Designation</label>
+                            <select id="uGrade" required>
+                                <option value="staff">Clinical Staff</option>
+                                <option value="biologist">Hémo-Biologiste</option>
+                                <option value="doctor">Medical Doctor</option>
+                                <option value="admin">System Administrator</option>
+                            </select>
+                        </div>
+                        <div class="um-input-group">
+                            <label>Password</label>
+                            <div class="input-password-wrapper">
+                                <input type="password" id="uPassword" placeholder="Minimum 12 characters" required>
+                            </div>
+                        </div>
+                        <div class="um-input-group">
+                            <label>Retype Password</label>
+                            <div class="input-password-wrapper">
+                                <input type="password" id="uRePassword" placeholder="Confirm selection" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- PASSWORD LIVE COMPLIANCE TRACKER (Inspired by image_952289.png) -->
+                    <div class="um-form-compliance-panel">
+                        <div class="compliance-heading">Access Guard Checklist</div>
+                        <div class="compliance-item" id="rule-match">
+                            <span class="chk-bullet">○</span> Passwords must match exactly
+                        </div>
+                        <div class="compliance-item" id="rule-length">
+                            <span class="chk-bullet">○</span> Minimum 6 characters required
+                        </div>
+                    </div>
+
+                    <div class="um-form-buttons">
+                        <button type="submit" class="um-btn-submit" id="formSubmitBtn">Create User</button>
+                        <button type="button" class="um-btn-cancel" id="formCancelBtn">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- NON-BLOCKING CUSTOM OVERLAY MODAL -->
+    <div id="umConfirmModal" class="um-modal-overlay um-element-hidden">
+        <div class="um-modal-card animate-scale-up">
+            <div class="um-modal-icon">⚠️</div>
+            <h3 id="umModalTitle">Confirm Action</h3>
+            <p id="umModalMessage">Are you sure you want to perform this operation?</p>
+            <div class="um-modal-footer">
+                <button id="umModalConfirmBtn" class="um-btn-confirm-danger">Proceed</button>
+                <button id="umModalCancelBtn" class="um-btn-cancel">Discard</button>
+            </div>
+        </div>
+    </div>
+</div>

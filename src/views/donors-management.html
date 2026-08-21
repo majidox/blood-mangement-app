@@ -1,0 +1,131 @@
+<div class="dm-module-container animate-fade-in">
+    
+    <div id="dmToastContainer" class="um-toast-container"></div>
+
+    <div class="um-view-header">
+        <div class="um-title-area">
+            <h1>Donor Directory</h1>
+            <p>Manage, screen, and track vital life-savers within the CTS registry.</p>
+        </div>
+        <button id="toggleDonorFormBtn" class="um-btn-primary">
+            <span class="btn-pulse-icon"></span> ➕ Add New Donor
+        </button>
+    </div>
+
+    <div class="um-metrics-row">
+        <div class="um-metric-card staff-card">
+            <span class="um-card-label">ACTIVE DONORS</span>
+            <div class="um-card-value-group">
+                <span class="um-card-main-val" id="totalDonorsCount">00</span>
+                <span class="um-card-badge-trend">+12% vs last month</span>
+            </div>
+        </div>
+        <div class="um-metric-card admin-card">
+            <span class="um-card-label">RARE TYPES (O-)</span>
+            <div class="um-card-value-group">
+                <span class="um-card-main-val" id="rareDonorsCount">00</span>
+                <span class="um-card-badge-status" style="color: #ff3838;">Critical: Needs refill</span>
+            </div>
+        </div>
+        <div class="um-metric-card pending-card" style="border-left: 4px solid #ffaa00;">
+            <span class="um-card-label">PENDING APPROVALS</span>
+            <div class="um-card-value-group">
+                <span class="um-card-main-val" id="pendingDonorsCount">00</span>
+                <span class="um-card-badge-status" style="color: #ffaa00; background: rgba(255,170,0,0.1); padding: 2px 8px; border-radius: 20px;">Review required</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="um-workspace-wrapper">
+        <div id="dmTableView" class="um-panel-view">
+            <div class="um-filter-bar">
+                <div class="um-search-box">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" id="dmSearchInput" placeholder="Search by name, phone, or unique code...">
+                </div>
+                <div class="um-filter-actions">
+                    <select id="dmBloodFilter">
+                        <option value="all">All Blood Types</option>
+                        <option value="A+">A+</option>
+                        <option value="A-">A-</option>
+                        <option value="B+">B+</option>
+                        <option value="B-">B-</option>
+                        <option value="O+">O+</option>
+                        <option value="O-">O-</option>
+                        <option value="AB+">AB+</option>
+                        <option value="AB-">AB-</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="um-table-card">
+                <table class="um-data-grid">
+                    <thead>
+                        <tr>
+                            <th>Donor Name</th>
+                            <th>Blood Type</th>
+                            <th>Registration Time</th>
+                            <th>Medical Antecedents</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="dmTableBody">
+                        </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div id="dmFormView" class="um-panel-view um-element-hidden">
+            <div class="um-form-layout-card">
+                <div class="form-header-block">
+                    <h2>Register New Blood Donor Profile</h2>
+                    <p>Initialize baseline screening attributes. Initial profile status defaults to "Pending".</p>
+                </div>
+
+                <form id="hospitalDonorForm" autocomplete="off" novalidate>
+                    <input type="hidden" id="dmFormActionState" value="create">
+                    <input type="hidden" id="editingDonorRowIndex">
+
+                    <div class="um-form-grid">
+                        <div class="um-input-group">
+                            <label>First Name</label>
+                            <input type="text" id="dFirstName" placeholder="e.g. Elena" required>
+                        </div>
+                        <div class="um-input-group">
+                            <label>Last Name</label>
+                            <input type="text" id="dLastName" placeholder="e.g. Hernandez" required>
+                        </div>
+                        <div class="um-input-group">
+                            <label>Contact Phone Number</label>
+                            <input type="tel" id="dPhone" placeholder="e.g. 0661XXXXXX" required>
+                        </div>
+                        <div class="um-input-group">
+                            <label>Blood Group Type</label>
+                            <select id="dBloodType" required>
+                                <option value="" disabled selected>Select configuration</option>
+                                <option value="A+">A Positive</option>
+                                <option value="A-">A Negative</option>
+                                <option value="B+">B Positive</option>
+                                <option value="B-">B Negative</option>
+                                <option value="O+">O Positive</option>
+                                <option value="O-">O Negative</option>
+                                <option value="AB+">AB Positive</option>
+                                <option value="AB-">AB Negative</option>
+                            </select>
+                        </div>
+                        <div class="um-input-group" style="grid-column: span 2;">
+                            <label>Medical Antecedents & Pathological History</label>
+                            <textarea id="dAntecedents" rows="3" placeholder="Describe any medical backgrounds..."></textarea>
+                        </div>
+                    </div>
+
+                    <div class="um-form-buttons">
+                        <button type="submit" class="um-btn-submit" id="dmFormSubmitBtn">Save Donor Record</button>
+                        <button type="button" class="um-btn-cancel" id="dmFormCancelBtn">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

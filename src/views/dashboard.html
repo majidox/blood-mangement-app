@@ -3,147 +3,217 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blood Management - Dashboard</title>
-    <link rel="stylesheet" href="../css/dashboard.css">
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <title>  Blood Management System</title>
+    <!-- Double check this path matches where your CSS file is stored! -->
+    <link rel="stylesheet" href="../css/dashboard.css"> 
+    
 </head>
-<body class="dashboard-body">
+<body>
 
+    <!-- MASTER WRAPPER: Holds both sidebar and main content side-by-side -->
     <div class="dashboard-container">
-        <aside class="sidebar-glass">
-            <div class="sidebar-header">
-                <i class='bx bxs-droplet-half'></i>
-                <span>BLOOD BANK</span>
-            </div>
 
-            <div class="user-widget">
-                <div class="avatar-wrapper">
-                    <img src="https://via.placeholder.com/80" alt="Utilisateur" id="user-avatar">
-                </div>
-                <div class="user-meta">
-                    <h4>Admin User</h4>
-                    <p>Lab Technician</p>
+        <!-- LEFT SIDEBAR -->
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <span class="brand-logo">🩸</span>
+                <div class="brand-text">
+                    <h2>Hopital Mixte Djelfa </h2>
+                    <p>Blood Management</p>
                 </div>
             </div>
 
-            <nav class="side-nav">
-                <a href="#" class="nav-item active"><i class='bx bxs-dashboard'></i> Dashboard</a>
-                <a href="donor.html" class="nav-item"><i class='bx bxs-user-plus'></i> Donors</a>
-                <a href="#" class="nav-item"><i class='bx bxs-layer'></i> Inventory</a>
-                <a href="#" class="nav-item"><i class='bx bxs-report'></i> Reports</a>
-                <div class="nav-spacer"></div>
-                <a href="../views/login.html" class="nav-item logout"><i class='bx bxs-log-out'></i> Logout</a>
-            </nav>
+            <nav class="sidebar-menu">
+    <span class="menu-divider">Blood Management</span>
+    <a href="#" class="menu-item active">📊 Overview Dashboard</a>
+    <a href="#" class="menu-item" id="nav-donors-trigger">👥 Donors Management</a>
+    <a href="#" class="menu-item" id="nav-test-trigger" >🧪 Testing & Approvals</a>
+    <a href="#" class="menu-item" id="nav-inve-trigger">📦 Inventory Stock</a>
+    <a href="#" class="menu-item">🩸 Blood Distribution</a>
+    <a href="#" class="menu-item">📈 Analytics & Reports</a>
+
+    <span class="menu-divider">System Management</span>
+    
+    <!-- MAIN DROPDOWN PARENT TRIGGER -->
+    <a href="#" class="menu-item admin-only-menu" id="adminMenuTrigger">
+        <span>⚙️ Administration</span>
+        <span class="dropdown-caret">▼</span>
+    </a>
+    
+    <!-- FULL SUB-MENU ITEM TREE CONTAINER -->
+    <div id="adminSubMenu" class="submenu-container submenu-hidden">
+        <a href="#" class="submenu-item" id="sub-gestion-users"> 👤 Gestion des Utilisateurs</a>
+        <a href="#" class="submenu-item" id="sub-roles"> 🔑 Rôles & Permissions</a>
+        <a href="#" class="submenu-item" id="sub-reports"> 📊 Report Manager</a>
+        <a href="#" class="submenu-item" id="sub-db-io"> 💾 Import / Export Database</a>
+        <a href="#" class="submenu-item" id="sub-licensing"> 🪪 Activation & Licensing</a>
+    </div>
+</nav>
+
+           
+
+            <div class="sidebar-footer">
+                <div class="user-status">
+                    <span class="status-indicator online"></span>
+                    <p>Logged as: <span id="user-role">User</span></p>
+                </div>
+                
+                <div class="developer-info">
+                    <div class="version-row">
+                    <p class="dev-name">Developed by <span>Bouzouada Nail (Xork)</span></p>
+                    
+                        <span class="badge-beta">BETA</span>
+                        <span class="version-tag">v0.1.0</span>
+                    </div>
+                </div>
+            </div>
+
+
+
+              
+
         </aside>
 
+        <!-- RIGHT MAIN CONTENT AREA -->
         <main class="main-content">
-            <header class="top-nav">
-                <div class="breadcrumb"><h4>Dashboard / Overview</h4></div>
-                <div class="search-bar">
-                    <i class='bx bx-search'></i>
-                    <input type="text" placeholder="Search donors or blood types...">
-                </div>
-            </header>
-
-            <section class="card-grid">
-                <div class="stat-card orange">
-                    <div class="icon-box"><i class='bx bxs-data'></i></div>
-                    <div class="card-content">
-                        <small>Total Units</small>
-                        <h3>450</h3>
-                    </div>
-                </div>
-
-                <div class="stat-card green">
-                    <div class="icon-box"><i class='bx bxs-group'></i></div>
-                    <div class="card-content">
-                        <small>Donors</small>
-                        <h3>1,240</h3>
-                    </div>
-                </div>
-
-                <div class="stat-card red">
-                    <div class="icon-box"><i class='bx bxs-error-alt'></i></div>
-                    <div class="card-content">
-                        <small>Low Stock</small>
-                        <h3>3 Types</h3>
-                    </div>
-                </div>
-
-                <div class="stat-card blue">
-                    <div class="icon-box"><i class='bx bxs-calendar-check'></i></div>
-                    <div class="card-content">
-                        <small>Distributed</small>
-                        <h3>85</h3>
-                    </div>
-                </div>
-            </section>
-
-            <section class="bottom-grid">
-                <div class="data-panel stock-list">
-                    <h3>Available Units by Type</h3>
-                    <div class="stock-item"><span>A+</span><strong>120 Units</strong></div>
-                    <div class="stock-item"><span>A-</span><strong>120 Units</strong></div>
-                    <div class="stock-item"><span>O+</span><strong class="low-text">4 Units (Low)</strong></div>
-                    <div class="stock-item"><span>O-</span><strong class="low-text">4 Units (Low)</strong></div>
-                    <div class="stock-item"><span>B+</span><strong>45 Units</strong></div>
-                    <div class="stock-item"><span>B-</span><strong>45 Units</strong></div>
-                    <div class="stock-item"><span>AB+</span><strong class="low-text">2 Units (Low)</strong></div>
-                    <div class="stock-item"><span>AB-</span><strong class="low-text">2 Units (Low)</strong></div>
-                </div>
-
-                <div class="data-panel distribution-panel">
-    <h3>Weekly Comparison: Donors vs Distributed</h3>
+            
+            <!-- TOP NAVBAR -->
+            <header class="navbar">
+    <div class="nav-search">
+        🔍 <input type="text" placeholder="Quick search donor or blood bag...">
+    </div>
     
-    <div class="chart-container">
-        <div class="chart-row">
-            <div class="bar-group">
-                <div class="bar donor" style="height: 60%;" title="Donors: 12" data-value="12"></div>
-                <div class="bar distributed" style="height: 40%;" title="Distributed: 8"></div>
-                <span class="day-label">Mon</span>
-            </div>
-            <div class="bar-group">
-                <div class="bar donor" style="height: 80%;" title="Donors: 18"></div>
-                <div class="bar distributed" style="height: 50%;" title="Distributed: 10"></div>
-                <span class="day-label">Tue</span>
-            </div>
-            <div class="bar-group">
-                <div class="bar donor" style="height: 45%;" title="Donors: 9"></div>
-                <div class="bar distributed" style="height: 70%;" title="Distributed: 14"></div>
-                <span class="day-label">Wed</span>
-            </div>
-            <div class="bar-group">
-                <div class="bar donor" style="height: 90%;" title="Donors: 22"></div>
-                <div class="bar distributed" style="height: 30%;" title="Distributed: 6"></div>
-                <span class="day-label">Thu</span>
-            </div>
-            <div class="bar-group">
-                <div class="bar donor" style="height: 55%;" title="Donors: 11"></div>
-                <div class="bar distributed" style="height: 65%;" title="Distributed: 13"></div>
-                <span class="day-label">Fri</span>
-            </div>
-            <div class="bar-group">
-                <div class="bar donor" style="height: 30%;" title="Donors: 6"></div>
-                <div class="bar distributed" style="height: 20%;" title="Distributed: 4"></div>
-                <span class="day-label">Sat</span>
-            </div>
-            <div class="bar-group">
-                <div class="bar donor" style="height: 20%;" title="Donors: 4"></div>
-                <div class="bar distributed" style="height: 10%;" title="Distributed: 2"></div>
-                <span class="day-label">Sun</span>
+    <div class="nav-actions">
+        <div class="notification-wrapper">
+            <button class="nav-btn" id="notificationBell">
+                🔔 <span class="badge" id="notifBadge">3</span>
+            </button>
+            
+            <div id="notificationDropdown" class="notif-dropdown hidden">
+                <div class="notif-header">
+                    <h3>Notifications</h3>
+                    <button id="markAllReadBtn">Mark all as read</button>
+                </div>
+                <div class="notif-body">
+                    <div class="notif-item unread">
+                        <div class="notif-status-dot"></div>
+                        <div class="notif-content">
+                            <p><strong>Urgent:</strong> O- negative blood stock dropped below critical reserve threshold.</p>
+                            <span class="notif-time">2 mins ago</span>
+                        </div>
+                    </div>
+                    <div class="notif-item unread">
+                        <div class="notif-status-dot"></div>
+                        <div class="notif-content">
+                            <p><strong>Lab Testing:</strong> 4 blood bags from today's collection require batch validation approvals.</p>
+                            <span class="notif-time">45 mins ago</span>
+                        </div>
+                    </div>
+                    <div class="notif-item unread">
+                        <div class="notif-status-dot"></div>
+                        <div class="notif-content">
+                            <p><strong>System Profile:</strong> Security login signature authorized for admin account.</p>
+                            <span class="notif-time">2 hours ago</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+
+        <div class="user-profile">
+            <div class="user-meta">
+                <span class="username">Username</span>
+                <span class="role-tag">Role</span>
+            </div>
+        </div>
+        <button class="btn-disconnect" id="logoutBtn">🚪 Logout</button>
+    </div>
+</header>
+
+            <!-- VIEWPORT MAIN PANEL -->
+            <section class="viewport-panel">
+                <div class="view-header">
+                    <h1>System Statistics Summary</h1>
+                    <p>Real-time clinical metrics dashboard</p>
+                </div>
+
+                <!-- STATISTICS CARDS GRID -->
+                <!-- STATISTICS CARDS GRID -->
+<div class="stats-grid">
+    <div class="stat-card">
+        <div class="stat-info">
+            <h3>Total Registered Donors</h3>
+            <p class="stat-number" id="stat-donors">0</p> <!-- Added ID -->
+        </div>
+        <span class="stat-visual-icon">👥</span>
     </div>
 
-    <div class="chart-legend">
-        <div class="legend-item"><span class="dot donor-dot"></span> Donors</div>
-        <div class="legend-item"><span class="dot dist-dot"></span> Distributed</div>
+    <div class="stat-card">
+        <div class="stat-info">
+            <h3>Approved Blood Bags</h3>
+            <p class="stat-number" id="stat-approved">0</p> <!-- Added ID -->
+        </div>
+        <span class="stat-visual-icon">🧪</span>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-info">
+            <h3>Total Reserve Stock</h3>
+            <p class="stat-number" id="stat-stock">0</p> <!-- Added ID -->
+        </div>
+        <span class="stat-visual-icon">📦</span>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-info">
+            <h3>Dispatched This Month</h3>
+            <p class="stat-number" id="stat-dispatched">0</p> <!-- Added ID -->
+        </div>
+        <span class="stat-visual-icon">🚛</span>
     </div>
 </div>
             </section>
         </main>
+
     </div>
+    
+
+
+    <div id="aboutModal" class="modal-overlay hidden">
+        <div class="about-card">
+            <button id="closeAboutBtn" class="modal-close-btn">&times;</button>
+            
+            <div class="about-header">
+                <div class="about-logo animate-pulse">🩸</div>
+                <h2>Gestion de Blood</h2>
+                <span class="about-badge">v0.1.0 Beta</span>
+            </div>
+            
+            <div class="about-body">
+                <p class="about-purpose">
+                    This specialized clinical environment was engineered for the modern optimization and secure management of the <strong>Centre de Transfusion Sanguine (CTS)</strong> at <strong>Hôpital Mixte de Djelfa</strong>.
+                </p>
+                
+                <div class="credits-section">
+                    <div class="credit-row">
+                        <span class="role">Lead Developer & Designer</span>
+                        <span class="name">Bouzouada Nail (Xork)</span>
+                    </div>
+                    <div class="credit-row">
+                        <span class="role">Medical Consultant & Specialist</span>
+                        <span class="name">Dr. Khalfi Loubna <small>(Hémo-Biologie)</small></span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="about-footer">
+                <p>© 2026 All Rights Reserved.</p>
+            </div>
+        </div>
+    </div>
+
     <script src="../renderers/renderers-dashboard.js"></script>
+    <script src="../renderers/main-layout-controller.js"></script>
 
 </body>
 </html>

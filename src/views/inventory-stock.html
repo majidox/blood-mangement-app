@@ -1,0 +1,254 @@
+<!-- STEP 1: MASTER INVENTORY BASE WRAPPER -->
+<div class="container-fluid inventory-dashboard py-3">
+    <div class="row g-3">
+        
+        <!-- LEFT WORKSPACE COLUMN -->
+        <div class="col-lg-9">
+            
+            <!-- 🗂️ MAIN TABS SELECTOR -->
+            <ul class="nav nav-tabs border-0 mb-3" id="inventoryMasterTabs" role="tablist">
+                <li class="nav-item">
+                    <button class="nav-link active fw-bold px-4" id="tabBloodStock">🩸 Blood Bags Stock</button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link fw-bold px-4" id="tabSerology">🧪 Serology & Reagents</button>
+                </li>
+            </ul>
+
+            <!-- 🔍 SEARCH AND FILTERS BAR -->
+            <div class="bg-dark-card p-3 rounded mb-3 d-flex flex-wrap gap-2 justify-content-between align-items-center">
+                <div class="d-flex gap-2">
+                    <!-- Blood Type Filter -->
+                    <select id="filterCriteriaType" class="form-select bg-dark text-white border-secondary w-auto">
+                        <option value="all">Blood Type: All</option>
+                        <option value="O-">O-</option>
+                        <option value="O+">O+</option>
+                        <option value="A-">A-</option>
+                        <option value="A+">A+</option>
+                        <option value="B-">B-</option>
+                        <option value="B+">B+</option>
+                        <option value="AB-">AB-</option>
+                        <option value="AB+">AB+</option>
+                    </select>
+
+                    <!-- Location Filter -->
+                    <select id="filterCriteriaLocation" class="form-select bg-dark text-white border-secondary w-auto">
+                        <option value="all">Storage: All Locations</option>
+                        <option value="fridge-main">Fridge A-1 (Main Stock)</option>
+                        <option value="fridge-plasma">Deep Cold C-2 (Plasma)</option>
+                        <option value="cabinet-reagents">Reagent Cabinet Shelf-3</option>
+                    </select>
+                </div>
+
+
+                <!-- Input Field Search -->
+                <div class="search-box-wrapper w-auto">
+                    <input type="text" id="inventorySearchField" class="form-control bg-dark text-white border-secondary" placeholder="Search Serial or Kit Name...">
+                </div>
+
+            </div>
+
+            <div id="bloodSubTabsWrapper" class="mb-3">
+                <ul class="nav nav-pills gap-2" id="bloodSubTabs" style="border-bottom: none !important; display: flex; flex-direction: row; list-style: none; padding-left: 0; margin: 0;">
+                    <li class="nav-item">
+                        <button class="nav-link active btn-sm fw-bold px-3 py-1.5" id="bloodTabActive" style="border-radius: 6px; font-size: 0.85rem;">🟢 Active Inventory</button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="nav-link btn-sm fw-bold px-3 py-1.5" id="bloodTabQuarantine" style="border-radius: 6px; font-size: 0.85rem;">⚠️ Quarantine</button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="nav-link btn-sm fw-bold px-3 py-1.5" id="bloodTabDistributed" style="border-radius: 6px; font-size: 0.85rem;">📦 Issued & Distributed</button>
+                    </li>
+                </ul>
+            </div>
+        
+
+
+
+            <!-- 🗂️ NEW: SEROLOGY FILTER SUB-TABS (Hidden by default, matches your homogeneous design) -->
+            <div id="serologySubTabsWrapper" class="d-none mb-3">
+                <ul class="nav nav-pills gap-2" id="serologySubTabs" style="border-bottom: none !important;">
+                    <li class="nav-item">
+                        <button class="nav-link active btn-sm fw-bold px-3 py-1.5" id="subTabActive" style="border-radius: 6px; font-size: 0.85rem;">🟢 Active Hub</button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="nav-link btn-sm fw-bold px-3 py-1.5" id="subTabExpired" style="border-radius: 6px; font-size: 0.85rem;">⚠️ Quarantine (Expired)</button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="nav-link btn-sm fw-bold px-3 py-1.5" id="subTabConsumed" style="border-radius: 6px; font-size: 0.85rem;">📦 Archive (Consumed)</button>
+                    </li>
+                </ul>
+            </div>
+            <!-- 📊 DYNAMIC BLOOD TYPE AGGREGATOR MATRIX -->
+                <div id="bloodTypeSummaryGrid" class="mb-3" style="display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 10px; width: 100%;">
+                    <!-- A+ Card -->
+                    <div style="background: #161b22; border: 1px solid #30363d; padding: 10px; border-radius: 6px; text-align: center; min-height: 75px; display: flex; flex-direction: column; justify-content: space-between;">
+                        <div class="text-muted fw-bold" style="font-size: 0.72rem; letter-spacing: 0.5px;">A+</div>
+                        <h5 class="text-white font-monospace my-1 fw-bold" id="count-A-pos" style="font-size: 1.15rem;">0</h5>
+                        <span class="badge" id="status-A-pos" style="font-size: 0.6rem; padding: 2px 4px; border-radius: 4px; font-weight: 600;">Empty</span>
+                    </div>
+
+                    <!-- A- Card -->
+                    <div style="background: #161b22; border: 1px solid #30363d; padding: 10px; border-radius: 6px; text-align: center; min-height: 75px; display: flex; flex-direction: column; justify-content: space-between;">
+                        <div class="text-muted fw-bold" style="font-size: 0.72rem; letter-spacing: 0.5px;">A-</div>
+                        <h5 class="text-white font-monospace my-1 fw-bold" id="count-A-neg" style="font-size: 1.15rem;">0</h5>
+                        <span class="badge" id="status-A-neg" style="font-size: 0.6rem; padding: 2px 4px; border-radius: 4px; font-weight: 600;">Empty</span>
+                    </div>
+
+                    <!-- B+ Card -->
+                    <div style="background: #161b22; border: 1px solid #30363d; padding: 10px; border-radius: 6px; text-align: center; min-height: 75px; display: flex; flex-direction: column; justify-content: space-between;">
+                        <div class="text-muted fw-bold" style="font-size: 0.72rem; letter-spacing: 0.5px;">B+</div>
+                        <h5 class="text-white font-monospace my-1 fw-bold" id="count-B-pos" style="font-size: 1.15rem;">0</h5>
+                        <span class="badge" id="status-B-pos" style="font-size: 0.6rem; padding: 2px 4px; border-radius: 4px; font-weight: 600;">Empty</span>
+                    </div>
+
+                    <!-- B- Card -->
+                    <div style="background: #161b22; border: 1px solid #30363d; padding: 10px; border-radius: 6px; text-align: center; min-height: 75px; display: flex; flex-direction: column; justify-content: space-between;">
+                        <div class="text-muted fw-bold" style="font-size: 0.72rem; letter-spacing: 0.5px;">B-</div>
+                        <h5 class="text-white font-monospace my-1 fw-bold" id="count-B-neg" style="font-size: 1.15rem;">0</h5>
+                        <span class="badge" id="status-B-neg" style="font-size: 0.6rem; padding: 2px 4px; border-radius: 4px; font-weight: 600;">Empty</span>
+                    </div>
+
+                    <!-- O+ Card -->
+                    <div style="background: #161b22; border: 1px solid #30363d; padding: 10px; border-radius: 6px; text-align: center; min-height: 75px; display: flex; flex-direction: column; justify-content: space-between;">
+                        <div class="text-muted fw-bold" style="font-size: 0.72rem; letter-spacing: 0.5px;">O+</div>
+                        <h5 class="text-white font-monospace my-1 fw-bold" id="count-O-pos" style="font-size: 1.15rem;">0</h5>
+                        <span class="badge" id="status-O-pos" style="font-size: 0.6rem; padding: 2px 4px; border-radius: 4px; font-weight: 600;">Empty</span>
+                    </div>
+
+                    <!-- O- Card -->
+                    <div style="background: #161b22; border: 1px solid #30363d; padding: 10px; border-radius: 6px; text-align: center; min-height: 75px; display: flex; flex-direction: column; justify-content: space-between;">
+                        <div class="text-muted fw-bold" style="font-size: 0.72rem; letter-spacing: 0.5px;">O-</div>
+                        <h5 class="text-white font-monospace my-1 fw-bold" id="count-O-neg" style="font-size: 1.15rem;">0</h5>
+                        <span class="badge" id="status-O-neg" style="font-size: 0.6rem; padding: 2px 4px; border-radius: 4px; font-weight: 600;">Empty</span>
+                    </div>
+
+                    <!-- AB+ Card -->
+                    <div style="background: #161b22; border: 1px solid #30363d; padding: 10px; border-radius: 6px; text-align: center; min-height: 75px; display: flex; flex-direction: column; justify-content: space-between;">
+                        <div class="text-muted fw-bold" style="font-size: 0.72rem; letter-spacing: 0.5px;">AB+</div>
+                        <h5 class="text-white font-monospace my-1 fw-bold" id="count-AB-pos" style="font-size: 1.15rem;">0</h5>
+                        <span class="badge" id="status-AB-pos" style="font-size: 0.6rem; padding: 2px 4px; border-radius: 4px; font-weight: 600;">Empty</span>
+                    </div>
+
+                    <!-- AB- Card -->
+                    <div style="background: #161b22; border: 1px solid #30363d; padding: 10px; border-radius: 6px; text-align: center; min-height: 75px; display: flex; flex-direction: column; justify-content: space-between;">
+                        <div class="text-muted fw-bold" style="font-size: 0.72rem; letter-spacing: 0.5px;">AB-</div>
+                        <h5 class="text-white font-monospace my-1 fw-bold" id="count-AB-neg" style="font-size: 1.15rem;">0</h5>
+                        <span class="badge" id="status-AB-neg" style="font-size: 0.6rem; padding: 2px 4px; border-radius: 4px; font-weight: 600;">Empty</span>
+                    </div>
+                </div>
+
+            <!-- 🧪 MANUAL REAGENT ENTRY FORM (Full-width card, hidden on load, shows only on Serology Tab) -->
+        <!-- 🧪 MANUAL REAGENT ENTRY FORM (Approach A Auto-Deduction Model) -->
+<div class="bg-dark-card p-3 rounded mb-3 entry-form-container d-none" id="reagentIngestionPanel">
+    <h6 class="text-primary fw-bold mb-3 d-flex align-items-center gap-2 font-monospace" style="font-size: 0.85rem; letter-spacing: 0.5px;">
+        🧪 REGISTER INCOMING SEROLOGY / REAGENT DELIVERY BATCH
+    </h6>
+    <form id="manualReagentForm" class="row g-2 align-items-end">
+        <div class="col-md-2">
+            <label class="form-label text-muted small fw-bold mb-2">Kit / Reagent Name</label>
+            <input type="text" id="inputKitName" class="form-control form-entry-input" placeholder="e.g., Anti-A" required>
+        </div>
+        <div class="col-md-2">
+            <label class="form-label text-muted small fw-bold mb-2">Batch / Lot No.</label>
+            <input type="text" id="inputBatchLot" class="form-control form-entry-input" placeholder="e.g., LOT-X2026" required>
+        </div>
+        <div class="col-md-1">
+            <label class="form-label text-muted small fw-bold mb-2">Boxes Qty</label>
+            <input type="number" id="inputQty" class="form-control form-entry-input" min="1" placeholder="Qty" required>
+        </div>
+        <div class="col-md-1.5" style="width: 12%;">
+            <!-- 🔬 NEW FIELD: How many tests/drops inside 1 sealed box -->
+            <label class="form-label text-muted small fw-bold mb-2">Tests / Box</label>
+            <input type="number" id="inputTestsPerUnit" class="form-control form-entry-input" min="1" placeholder="e.g., 50" required>
+        </div>
+        <div class="col-md-1.5" style="width: 12%;">
+            <!-- 📉 NEW FIELD: Manual deduction flexibility value per blood bag -->
+            <label class="form-label text-muted small fw-bold mb-2">Deduct / Bag</label>
+            <input type="number" id="inputDeductionPerBag" class="form-control form-entry-input" min="0" placeholder="e.g., 2" required>
+        </div>
+        <div class="col-md-1.5" style="width: 11%;">
+            <label class="form-label text-muted small fw-bold mb-2">Expiration</label>
+            <input type="date" id="inputExpiryDate" class="form-control form-entry-input" required>
+        </div>
+        <div class="col-md-2">
+            <label class="form-label d-block mb-2" style="visibility: hidden; height: 17px;">Spacer</label>
+            <button type="submit" class="btn btn-primary-custom w-100 fw-bold d-flex align-items-center justify-content-center gap-2">
+                💾 Save Batch
+            </button>
+        </div>
+    </form>
+</div>
+
+            <!-- ⚓ STEP 2 ANCHOR: Table Grid Container -->
+            <div id="tableGridContainerAnchor">
+                <div class="table-responsive bg-dark-card p-3 rounded border border-secondary-subtle">
+                    <table class="table table-dark table-hover align-middle mb-0" id="mainInventoryGrid">
+                        
+                        <!-- 🩸 VIEW 1 HEADERS: BLOOD BAG STOCK (Active by default) -->
+                        <thead class="table-borderless border-bottom border-secondary text-uppercase font-monospace small text-muted" id="headersBloodStock">
+    <tr>
+        <th style="width: 15%;">Bag Serial ID</th>
+        <th style="width: 12%;">Blood Group</th>
+        <th style="width: 18%;">Phenotype Profile</th>
+        <th style="width: 12%;">Volume (mL)</th>
+        <th style="width: 18%;">Fridge Storage Location</th>
+        <th style="width: 13%;">Stock Status</th>
+        <th style="width: 12%; text-align: center;">Actions</th> <!-- ◄--- ADD THIS TH -->
+    </tr>
+</thead>
+                        <!-- 🧪 VIEW 2 HEADERS: SEROLOGY & REAGENT KITS (Hidden by default via d-none) -->
+                        <thead class="table-borderless border-bottom border-secondary text-uppercase font-monospace small text-muted d-none" id="headersSerologyStock">
+    <tr>
+        <th style="width: 25%; text-align: left; padding-left: 12px;">Reagent / Kit Name</th>
+        <th style="width: 15%; text-align: left;">Batch / Lot No.</th>
+        <th style="width: 13%; text-align: left;">Available Qty</th>
+        <th style="width: 22%; text-align: left;">Storage Cabinet Location</th>
+        <th style="width: 15%; text-align: left;">Expiration Date</th>
+        <th style="width: 10%; text-align: left;">Stock Status</th>
+    </tr>
+</thead>
+
+                        <!-- 🔄 DYNAMIC TABLE BODY -->
+                        <tbody id="inventoryMasterTableBody" class="font-monospace">
+                            <tr>
+                                <td colspan="6" class="text-center text-muted py-4">
+                                    Initializing inventory database cache records...
+                                </td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- LEFT/RIGHT SPLIT COLUMNS ROW: PERSISTENT RECENT MOVEMENTS TIMELINE SIDEBAR -->
+        <div class="col-lg-3" id="sidebarMovementsAnchor">
+            <div class="bg-dark-card p-3 rounded d-flex flex-column border border-secondary-subtle" style="min-height: 500px; max-height: 850px;">
+                
+                <!-- Sidebar Header -->
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <h5 class="m-0 fw-bold fs-6 text-uppercase tracking-wider text-white-50">⏱️ Recent Movements</h5>
+                    <button class="btn btn-sm btn-link text-muted text-decoration-none p-0" id="refreshMovementsLogBtn">🔄</button>
+                </div>
+                
+                <hr class="border-secondary my-2">
+                
+                <!-- Live Scrollable Activity Stream Log Feed -->
+                <div class="timeline-stream-container flex-grow-1 overflow-auto pe-1" id="liveRecentMovementsFeed" style="max-height: 750px;">
+                    <div class="movement-item-log border-bottom border-secondary py-2">
+                        <div class="d-flex align-items-center gap-2 small text-success">
+                            <span>🟢</span> <strong>System Ready</strong>
+                        </div>
+                        <div class="small mt-1 text-white-50">Inventory dashboard core frame loaded successfully. Waiting for active database connection...</div>
+                        <div class="item-timestamp text-muted mt-1 font-monospace" style="font-size: 0.72rem;">Ledger Initialized</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>

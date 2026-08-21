@@ -1,0 +1,235 @@
+<div class="ta-container">
+    <div class="ta-stats-grid">
+        <div class="ta-stat-card pending" id="statCardPendingBtn" style="cursor: pointer;">
+            <div class="card-icon">⏳</div>
+            <div class="card-info">
+                <h3 id="taCountPending">00</h3>
+                <p>Pending Verification</p>
+            </div>
+        </div>
+        <div class="ta-stat-card approved" id="statCardApprovedBtn" style="cursor: pointer;">
+            <div class="card-icon">🛡️</div>
+            <div class="card-info">
+                <h3 id="taCountApproved">00</h3>
+                <p>Approved Safe Bags</p>
+            </div>
+        </div>
+        <div class="ta-stat-card rejected" id="statCardRejectedBtn" style="cursor: pointer;">
+            <div class="card-icon">❌</div>
+            <div class="card-info">
+                <h3 id="taCountRejected">00</h3>
+                <p>Units Ineligible</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="ta-control-bar">
+        <div class="search-box-wrapper">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="taSearchInput" placeholder="Scan barcode sticker or type ID manually...">
+        </div>
+        
+        <div id="scannerStatusIndicator" class="scanner-status listening">
+            <span class="pulse-dot"></span> Automatic Hardware Scanner Active
+        </div>
+    </div>
+
+    <div class="ta-viewport-wrapper">
+        
+        <div id="taTableViewState" class="ta-view-panel">
+            <!-- 📦 NATIVE INTEGRATED LAB CONTROL HEADER BAR (WITH CORRECTED MARGINS) -->
+<div class="ledger-header-flex-wrapper" style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; padding-left: 16px; padding-right: 16px;">
+    
+    <!-- Title Left Side (Now sits perfectly flush with the BAG ID column axis) -->
+    <h3 style="margin: 0; padding: 0; color: #c9d1d9; display: flex; align-items: center; gap: 8px; font-size: 15px;">
+        <span>📦</span> Blood Bag Processing Ledger
+    </h3>
+
+    <!-- Right Side Integrated Toolset (Now sits perfectly flush with the scrollbar/ACTIONS axis) -->
+    <div style="display: flex; gap: 12px; align-items: center;">
+        
+        <!-- Biological Group Criteria Selector -->
+        <div style="display: flex; align-items: center; gap: 8px;">
+            <label style="color: #8b949e; font-size: 13px; font-family: inherit;">Group:</label>
+            <select id="taBloodTypeSelector" class="form-select-native" style="background: #0d1117; color: #c9d1d9; border: 1px solid #30363d; padding: 6px 12px; border-radius: 6px; font-size: 13px; cursor: pointer; font-family: monospace; font-weight: bold; outline: none;">
+                <option value="all">ALL</option>
+                <option value="A+">A+</option>
+                <option value="A-">A-</option>
+                <option value="B+">B+</option>
+                <option value="B-">B-</option>
+                <option value="AB+">AB+</option>
+                <option value="AB-">AB-</option>
+                <option value="O+">O+</option>
+                <option value="O-">O-</option>
+            </select>
+        </div>
+
+        <!-- Shift Timeline Toggle Component -->
+        <button id="quickFilterTodayBtn" class="row-action-btn" style="padding: 6px 12px; border-radius: 6px; font-size: 13px; font-weight: bold; display: flex; align-items: center; gap: 6px; background: #0d1117; border: 1px solid #30363d; color: #c9d1d9; cursor: pointer; transition: none;">
+            <span>📅</span> Today Only
+        </button>
+
+        <!-- Dynamic Registry Counter Text -->
+        <span id="liveLedgerStatusCounter" style="color: #8b949e; font-size: 12px; font-family: inherit; margin-left: 4px;">
+            Synchronized
+        </span>
+    </div>
+</div>
+            <div class="table-scroll-frame">
+                <table class="ta-data-table">
+                    <thead>
+                        <tr>
+                            <th>Bag ID</th>
+                            <th>Donor ID</th>
+                            <th>Blood Type</th>
+                            <th>Bag Preservative</th>
+                            <th>Approval Date</th>
+                            <th>Expiration Date</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="taInventoryTableBody">
+                        </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div id="taLabFormState" class="ta-view-panel um-element-hidden">
+            <div class="form-header">
+                <div class="active-donor-meta">
+                    <span class="meta-label">STEP 2: CLINICAL DATA ASSAY ENTRY</span>
+                    <h2 id="taTargetDonorName">LOADING NAME...</h2>
+                    <span id="taTargetDonorCode" class="meta-badge-id">ID: 0000</span>
+                </div>
+                <button type="button" class="btn-secondary-dark ta-back-to-ledger-btn">← Back to Ledger</button>
+            </div>
+
+            <form id="taMedicalValidationForm">
+                <div class="form-grid-layout">
+                    <div class="form-section-card">
+                        <h3>🩸 Immunohematology Blood Group Typing</h3>
+                        <p class="section-subtitle">Enforces forward and reverse crossover authentication safeguards</p>
+                        
+                        <div class="input-row">
+                            <div class="input-group">
+                                <label for="taForwardTyping">Forward Typing (Cell Antigens)</label>
+                                <select id="taForwardTyping" required>
+                                    <option value="" disabled selected>Select forward typing</option>
+                                    <option value="O+">O Rh Positive (+)</option>
+                                    <option value="O-">O Rh Negative (-)</option>
+                                    <option value="A+">A Rh Positive (+)</option>
+                                    <option value="A-">A Rh Negative (-)</option>
+                                    <option value="B+">B Rh Positive (+)</option>
+                                    <option value="B-">B Rh Negative (-)</option>
+                                    <option value="AB+">AB Rh Positive (+)</option>
+                                    <option value="AB-">AB Rh Negative (-)</option>
+                                </select>
+                            </div>
+                            
+                            <div class="input-group">
+                                <label for="taReverseTyping">Reverse Typing (Serum Antibodies)</label>
+                                <select id="taReverseTyping" required>
+                                    <option value="" disabled selected>Select reverse typing</option>
+                                    <option value="O+">O Rh Positive (+)</option>
+                                    <option value="O-">O Rh Negative (-)</option>
+                                    <option value="A+">A Rh Positive (+)</option>
+                                    <option value="A-">A Rh Negative (-)</option>
+                                    <option value="B+">B Rh Positive (+)</option>
+                                    <option value="B-">B Rh Negative (-)</option>
+                                    <option value="AB+">AB Rh Positive (+)</option>
+                                    <option value="AB-">AB Rh Negative (-)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="phenotype-matrix-wrapper">
+                            <label>Extended Phenotype Profile Matrix</label>
+                            <div class="phenotype-grid">
+                                <label class="checkbox-pill"><input type="checkbox" id="pheno_D" checked> <span>D</span></label>
+                                <label class="checkbox-pill"><input type="checkbox" id="pheno_C"> <span>C</span></label>
+                                <label class="checkbox-pill"><input type="checkbox" id="pheno_c"> <span>c</span></label>
+                                <label class="checkbox-pill"><input type="checkbox" id="pheno_E"> <span>E</span></label>
+                                <label class="checkbox-pill"><input type="checkbox" id="pheno_e"> <span>e</span></label>
+                                <label class="checkbox-pill"><input type="checkbox" id="pheno_K"> <span>Kell (K)</span></label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section-card">
+                        <h3>📦 Technical Bag Configuration</h3>
+                        <p class="section-subtitle">Calculates expiration dates cleanly based on chemical solutions</p>
+
+                        <div class="input-group">
+                            <label for="taBagAnticoagulant">Anticoagulant Solution Type</label>
+                            <select id="taBagAnticoagulant" required>
+                                <option value="CPD">CPD (Citrate Phosphate Dextrose) ── [+21 Days survival]</option>
+                                <option value="CPDA1" selected>CPDA-1 (CPD Adenine-1) ── [+35 Days survival]</option>
+                                <option value="SAGM">SAGM (Saline Adenine Glucose Mannitol) ── [+42 Days survival]</option>
+                            </select>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="taEligibilityStatus">Verification Judgment Outcome</label>
+                            <select id="taEligibilityStatus" class="status-selector-box" required>
+                                <option value="eligible" selected>✅ Eligible ─ Approve Unit & Generate Blood Bag</option>
+                                <option value="ineligible">❌ Not Eligible ─ Reject Unit & Quarantine for Discard</option>
+                            </select>
+                        </div>
+
+                        <div id="ineligibleReasonWrapper" class="input-group um-element-hidden">
+                            <label for="taIneligibleComment">Ineligibility Reason / Clinical Comments</label>
+                            <textarea id="taIneligibleComment" rows="2" placeholder="Specify clinical assay failures or reactive markers..."></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-actions-footer">
+                    <div class="auto-print-notice">🖨️ <span>Label auto-spools on submission confirmation.</span></div>
+                    <button type="submit" id="taSubmitFinalDecisionBtn" class="btn-primary-action">Finalize Laboratory Sign-Off</button>
+                </div>
+            </form>
+        </div>
+
+        <div id="taPassportViewState" class="ta-view-panel um-element-hidden">
+            <div class="passport-card-frame">
+                <div class="passport-header-bar">
+                    <div class="title-meta">
+                        <span class="badge-eligible">🛡️ VERIFIED COMPLIANT BIOLOGICAL ASSET</span>
+                        <h2 id="passBagTitleId">BAG-2026-XXXX</h2>
+                    </div>
+                    <button type="button" class="btn-secondary-dark ta-back-to-ledger-btn">← Back to Ledger</button>
+                </div>
+
+                <div class="passport-grid-layout">
+                    <div class="passport-info-block">
+                        <h4>📋 Linked Donor Profile Details</h4>
+                        <table class="passport-mini-table">
+                            <tr><td>Donor Reference ID:</td><td id="passDonorCode" class="mono-highlight">----</td></tr>
+                            <tr><td>Full Identity Name:</td><td id="passDonorName" style="font-weight: bold; color: #fff;">----</td></tr>
+                            <tr><td>Contact Phone Line:</td><td id="passDonorPhone">----</td></tr>
+                        </table>
+                    </div>
+
+                    <div class="passport-info-block">
+                        <h4>🔬 Laboratory Analysis Summary</h4>
+                        <table class="passport-mini-table">
+                            <tr><td>Absolute Blood Group:</td><td><span id="passBloodGroup" class="blood-type-badge-large">O+</span></td></tr>
+                            <tr><td>Extended Antigen Mask:</td><td id="passPhenotype" class="mono-highlight">----</td></tr>
+                            <tr><td>Preservative Formula:</td><td id="passPreservative">----</td></tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="passport-footer-logistics">
+                    <div class="timestamp-tracking-pills">
+                        <div>📆 <strong>Approved At:</strong> <span id="passApprovedDate">--/--/----</span></div>
+                        <div>⌛ <strong>Expiration Limit:</strong> <span id="passExpiresDate" style="color:#ff5858;">--/--/----</span></div>
+                    </div>
+                    <button type="button" id="taPassportReprintBtn" class="btn-primary-action" style="background: #58a6ff;">🖨️ Reprint Product Barcode Sticker</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
